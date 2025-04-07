@@ -17,67 +17,66 @@ async function getWeatherDataBycityName({ city }) {
 
     // const data = await response.json();
 
-    let processedCity = city.tolowerCase(city);
+    let processedCity = city.toLowerCase(city);
 
     switch(processedCity) {
-        case "dhaka":
-            return {
-                city: "Dhaka",
-                temperature: 27,
-                humidity: 80,
-                wind: 10,
-                weatherCondition: "Partly Cloudy",
-                feelsLike: 30,
-                high: 32,
-                low: 25,
-                pressure: 1010,
-                visibility: 10,
-
-            };
-        case "chittagong":
+      case "dhaka":
         return {
-            city: "Chittagong",
-            temperature: 30,
-            humidity: 70,
-            wind: 15,
-            weatherCondition: "Sunny",
-            feelsLike: 35,
-            high: 35,
-            low: 28,
-            pressure: 1005,
-            visibility: 12,
+          city: "Dhaka",
+          temperature: 27,
+          humidity: 80,
+          wind: 10,
+          weatherCondition: "Partly Cloudy",
+          feelsLike: 30,
+          high: 32,
+          low: 25,
+          pressure: 1010,
+          visibility: 10,
         };
-        case "feni":
-            return {
-              city: "Feni",
-              temperature: 28,
-              humidity: 85,
-              wind: 8,
-              weatherCondition: "Mostly Cloudy",
-              feelsLike: 32,
-              high: 33,
-              low: 26,
-              pressure: 1012,
-              visibility: 9,
-            };
-        case "gazipur":
+      case "chittagong":
         return {
-            city: "Gazipur",
-            temperature: 29,
-            humidity: 75,
-            wind: 12,
-            weatherCondition: "Light Rain",
-            feelsLike: 33,
-            high: 34,
-            low: 27,
-            pressure: 1008,
-            visibility: 11,
+          city: "Chittagong",
+          temperature: 30,
+          humidity: 70,
+          wind: 15,
+          weatherCondition: "Sunny",
+          feelsLike: 35,
+          high: 35,
+          low: 28,
+          pressure: 1005,
+          visibility: 12,
         };
-        default:
-            return {
-            city: "null",
-            error: 'city not found',
-            };
+      case "feni":
+        return {
+          city: "Feni",
+          temperature: 28,
+          humidity: 85,
+          wind: 8,
+          weatherCondition: "Mostly Cloudy",
+          feelsLike: 32,
+          high: 33,
+          low: 26,
+          pressure: 1012,
+          visibility: 9,
+        };
+      case "gazipur":
+        return {
+          city: "Gazipur",
+          temperature: 29,
+          humidity: 75,
+          wind: 12,
+          weatherCondition: "Light Rain",
+          feelsLike: 33,
+          high: 34,
+          low: 27,
+          pressure: 1008,
+          visibility: 11,
+        };
+      default:
+        return {
+          city: "null",
+          error: 'city not found',
+        };
     }
 
 
@@ -85,16 +84,12 @@ async function getWeatherDataBycityName({ city }) {
     //return data;
   }
 
-async function main() {
-  const transport = new StdioServerTransport();
-  await server.listen(transport);
-}
 
 server.tool(
     "getWeatherDataBycityName",
-    z.object({
+    {
       city: z.string(),
-    }),
+    },
     async ({ city }) => ({
             content: [
               {
@@ -113,6 +108,6 @@ server.tool(
   }
   
   init().catch((error) => {
-    console.error("Fatal error in main():", error);
+    console.error("Fatal error in init():", error);
     process.exit(1);
   });

@@ -87,7 +87,6 @@ class MCPClient {
       args: [serverScriptPath],
     });
     await this.mcp.connect(this.transport);
-
     // Register tools
     const toolsResult = await this.mcp.listTools();
     this.tools = toolsResult.tools.map((tool) => {
@@ -264,7 +263,11 @@ async function main() {
   try {
     await mcpClient.connectToServer(process.argv[2]);
     await mcpClient.chatLoop();
-  } finally {
+  }
+  catch(e){
+    console.log(e);
+  }
+   finally {
     await mcpClient.cleanup();
     process.exit(0);
   }

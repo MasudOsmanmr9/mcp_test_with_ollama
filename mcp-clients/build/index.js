@@ -201,6 +201,9 @@ async function main() {
         await mcpClient.connectToServer(process.argv[2]);
         await mcpClient.chatLoop();
     }
+    catch (e) {
+        console.log(e);
+    }
     finally {
         await mcpClient.cleanup();
         process.exit(0);
